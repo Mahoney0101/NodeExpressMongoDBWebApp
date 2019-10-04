@@ -11,8 +11,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .navbar {
-  background-color: #000000;
+  background-color: #ffffff;
   border-color: #ffffff;
+  color: #000000;
 }
 
 .navbar-brand {
@@ -27,7 +28,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 small {
-  color: #aaa;
+  color: rgb(0, 0, 0);
 }
 
 .card {
@@ -63,13 +64,13 @@ h1 small {
 }
 
 h4 a, h4 a:hover {
-  color: #fff;
+  color: rgb(0, 0, 0);
 }
 
 h4 small {
   font-size: 60%;
   line-height: 200%;
-  color: #aaa;
+  color: rgb(0, 0, 0);
 }
 
 .address {
@@ -94,3 +95,5 @@ legend {
   height: 85px;
   display: table-cell;
 }
+a{color: #000000;}
+
