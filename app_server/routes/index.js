@@ -15,5 +15,7 @@ router.get('/form', (req, res, next) => {
 router.get('/reviews', (req, res, next) => {
   res.render('reviews');
 });
-
+router.get('/register', (req, res, next) => {
+  res.render('register');
+});
 module.exports = router;
