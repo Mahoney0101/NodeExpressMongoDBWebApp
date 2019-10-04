@@ -42,5 +42,18 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+const MongoClient = require('mongodb').MongoClient;
+
+// replace the uri string with your connection string.
+const uri = "mongodb+srv://james:efdfdbf7a413@cluster0-df223.mongodb.net/admin?retryWrites=true&w=majority"
+MongoClient.connect(uri, function(err, client) {
+   if(err) {
+        console.log('Error occurred while connecting to MongoDB Atlas...\n',err);
+   }
+   console.log('Connected...');
+   const collection = client.db("test").collection("devices");
+   // perform actions on the collection object
+   client.close();
+}, { useNewUrlParser: true });
 
 module.exports = app;
