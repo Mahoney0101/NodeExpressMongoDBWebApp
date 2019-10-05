@@ -11,7 +11,7 @@ const users = require('./app_server/routes/users');
 
 const app = express();
 
-app.listen(80, () => {});
+//app.listen(80, () => {});
 
 
 
@@ -32,11 +32,11 @@ app.use('/', index);
 app.use('/users', users);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  const err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
+//app.use(function(req, res, next) {
+  //const err = new Error('Not Found');
+ // err.status = 404;
+ // next(err);
+//});
 
 // error handler
 app.use(function(err, req, res, next) {
@@ -48,18 +48,29 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-const MongoClient = require('mongodb').MongoClient;
+var dbConn = mongodb.MongoClient.connect('mongodb+srv://james:<efdfdbf7a413>@cluster0-df223.mongodb.net/admin?retryWrites=true&w=majority');
 
-// replace the uri string with your connection string.
-const uri = "mongodb+srv://james:efdfdbf7a413@cluster0-df223.mongodb.net/admin?retryWrites=true&w=majority"
-MongoClient.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true }, function(err, client) {
-   if(err) {
-        console.log('Error occurred while connecting to MongoDB Atlas...\n',err);
-   }
-   console.log('Connected...');
-   const collection = client.db("test").collection("devices");
-   // perform actions on the collection object
-   client.close();
+var app = express();
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path.resolve(__dirname, 'public')));
+
+app.post('/register', function (req, res) {
+    dbConn.then(function(db) {
+        delete req.body._id; // for safety reasons
+        db.collection('users').insertOne(req.body);
+    });    
+    res.send('Data received:\n' + JSON.stringify(req.body));
 });
+
+app.get('/register',  function(req, res) {
+    dbConn.then(function(db) {
+        db.collection('users').find({}).toArray().then(function(feedbacks) {
+            res.status(200).json(feedbacks);
+        });
+    });
+});
+
+app.listen(process.env.PORT || 3000, process.env.IP || '0.0.0.0' );
 
 module.exports = app;
