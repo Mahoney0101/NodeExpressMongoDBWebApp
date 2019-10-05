@@ -5,6 +5,7 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const ObjectId = require("mongodb").ObjectID;
+var mongodb = require('mongodb');
 
 const index = require('./app_server/routes/index');
 const users = require('./app_server/routes/users');
@@ -50,7 +51,7 @@ app.use(function(err, req, res, next) {
 });
 var dbConn = mongodb.MongoClient.connect('mongodb+srv://james:<efdfdbf7a413>@cluster0-df223.mongodb.net/admin?retryWrites=true&w=majority');
 
-var app = express();
+//var app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.resolve(__dirname, 'public')));
