@@ -8,6 +8,7 @@ const MongoClient = require('mongodb').MongoClient;
 var bcrypt = require('bcryptjs');
 require('./app_server/models/db');
 
+
 var routes = require('./app_server/routes/index');
 //var routesApi = require('./app_api/routes/index');
 // var users = require('./app_server/routes/users');
@@ -158,6 +159,24 @@ withCredentials(function(credentials) {
     })
   });
 });
+
+
+withCredentials(function(credentials) {
+  app.post('/login', function(req,res){    
+    const cred = { };
+    cred.email = req.body.email;
+    cred.password = bcrypt.hashSync(req.body.password, 10);
+    credentials.findOne(cred, function(err,newuser){
+       if(err){
+         res.status(500).send("Does not exist");
+       } else {
+         res.status(200).send("Good");
+        // res.redirect('/login'); //here the redirect takes place
+       }
+    })
+  });
+});
+
 
 // app.post('/register', function(req,res){    
 //   const cred = { };
