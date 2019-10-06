@@ -1,37 +1,49 @@
-// JavaScript Document
-// Bring Mongoose into the app
-var mongoose = require( 'mongoose' );
+var mongoose = require('mongoose');
+var gracefulShutdown;
+var dbURI = 'mongodb+srv://james:efdfdbf7a413@cluster0-df223.mongodb.net/admin?retryWrites=true&w=majority';
+if (process.env.NODE_ENV === 'production') {
+    dbURI = process.env.MONGOLAB_URI;
+}
 
-// Build the connection string
-var dbURI = 'mongodb://localhost/ConnectionTest';
-
-// Create the database connection
-mongoose.connect(dbURI);
+mongoose.connect(dbURI,  { useNewUrlParser: true, useUnifiedTopology: true  });
 
 // CONNECTION EVENTS
-// When successfully connected
-mongoose.connection.on('connected', function () {
-  console.log('Mongoose default connection open to ' + dbURI);
+mongoose.connection.on('connected', function() {
+    console.log('Mongoose connected to ' + dbURI);
+});
+mongoose.connection.on('error', function(err) {
+    console.log('Mongoose connection error: ' + err);
+});
+mongoose.connection.on('disconnected', function() {
+    console.log('Mongoose disconnected');
 });
 
-// If the connection throws an error
-mongoose.connection.on('error',function (err) {
-  console.log('Mongoose default connection error: ' + err);
+// CAPTURE APP TERMINATION / RESTART EVENTS
+// To be called when process is restarted or terminated
+gracefulShutdown = function(msg, callback) {
+    mongoose.connection.close(function() {
+        console.log('Mongoose disconnected through ' + msg);
+        callback();
+    });
+};
+// For nodemon restarts
+process.once('SIGUSR2', function() {
+    gracefulShutdown('nodemon restart', function() {
+        process.kill(process.pid, 'SIGUSR2');
+    });
 });
-
-// When the connection is disconnected
-mongoose.connection.on('disconnected', function () {
-  console.log('Mongoose default connection disconnected');
-});
-
-// If the Node process ends, close the Mongoose connection
+// For app termination
 process.on('SIGINT', function() {
-  mongoose.connection.close(function () {
-    console.log('Mongoose default connection disconnected through app termination');
-    process.exit(0);
-  });
+    gracefulShutdown('app termination', function() {
+        process.exit(0);
+    });
 });
-
+// For Heroku app termination
+process.on('SIGTERM', function() {
+    gracefulShutdown('Heroku app termination', function() {
+        process.exit(0);
+    });
+});
 
 // BRING IN YOUR SCHEMAS & MODELS
-// For example
+//require('./locations');

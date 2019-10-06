@@ -1,68 +1,176 @@
-const express = require('express');
-const path = require('path');
-const favicon = require('serve-favicon');
-const logger = require('morgan');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const ObjectId = require("mongodb").ObjectID;
-var mongodb = require('mongodb');
+var express = require('express');
+var path = require('path');
+var favicon = require('serve-favicon');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
+const MongoClient = require('mongodb').MongoClient;
+var bcrypt = require('bcryptjs');
+require('./app_server/models/db');
 
-const index = require('./app_server/routes/index');
-const users = require('./app_server/routes/users');
+var routes = require('./app_server/routes/index');
+//var routesApi = require('./app_api/routes/index');
+// var users = require('./app_server/routes/users');
 
-const app = express();
-
-//app.listen(80, () => {});
-
-
-
+var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'app_server', 'views'));
 app.set('view engine', 'pug');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+//app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
+app.use('/', routes);
+//app.use('/api', routesApi);
+// app.use('/users', users);
 
-// catch 404 and forward to error handler
-//app.use(function(req, res, next) {
-  //const err = new Error('Not Found');
- // err.status = 404;
- // next(err);
-//});
+// // catch 404 and forward to error handler
+// app.use(function(req, res, next) {
+//     var err = new Error('Not Found');
+//     err.status = 404;
+//     next(err);
+// });
 
-// error handler
+// error handlers
+
+// development error handler
+// will print stacktrace
+if (app.get('env') === 'development') {
+    app.use(function(err, req, res, next) {
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: err
+        });
+    });
+}
+
+// production error handler
+// no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error: {}
+    });
 });
-var dbConn = mongodb.MongoClient.connect('mongodb+srv://james:<efdfdbf7a413>@cluster0-df223.mongodb.net/admin?retryWrites=true&w=majority');
 
+
+
+
+
+
+
+
+
+
+var dbConn = function() {
+  return new Promise((resolve, reject) => {
+      mongodb.MongoClient.connect('mongodb+srv://james:efdfdbf7a413@cluster0-df223.mongodb.net/admin?retryWrites=true&w=majority',  { useNewUrlParser: true, useUnifiedTopology: true  },
+      (err, client) => {
+        // Client returned
+        var db = client.db('users');
+    });
+  });
+}
+
+
+if(dbConn){console.log('MongoDB connected...')}
 //var app = express();
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.resolve(__dirname, 'public')));
 
-app.post('/register', function (req, res) {
-    dbConn.then(function(db) {
-        delete req.body._id; // for safety reasons
-        db.collection('users').insertOne(req.body);
-    });    
-    res.send('Data received:\n' + JSON.stringify(req.body));
+
+// router.post('/register',function(req,res,next){
+//   var userName = req.body.name;
+//    var email = req.body.email;
+//    var password = req.body.password;
+
+//   db.conn(function(err, database) {
+//     if (err) {
+//       res.sendStatus(500);
+//       console.log(err);
+//       return;
+//     }
+
+//     database.collection('users').insertOne({ name: userName, email : email, password: password });
+//   });
+// });
+// app.post('/register',(req, res)=>{
+//   var userName = req.body.name;
+//   var email = req.body.email;
+//   var password = req.body.password;
+//   db.conn(function(err, database) {
+//     if (err) {
+//       res.sendStatus(500);
+//       console.log(err);
+//       return;
+//     }
+
+//   db.collection('users').insertOne({ name: userName, email : email, password: password });
+//   res.render('login');
+// });
+
+// app.post('/register', function (req, res) {
+//   dbConn()
+//   .then(function(db) {
+//      // delete req.body._id; // for safety reasons
+//       res.send("item saved to database");
+//       db.collection('users').insertOne(req.body);
+//       res.send('Data received:\n' + JSON.stringify(req.body));
+//   })
+//   .catch(err => {
+//       console.log(err)
+//       res.status(400).send("unable to save to database");
+//   })
+// });
+function withCredentials(callback) {
+  const uri = "mongodb+srv://james:efdfdbf7a413@cluster0-df223.mongodb.net/admin?retryWrites=true&w=majority"
+  MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true  }, function(err, client) {
+   if(err) {
+     console.log('Error occurred while connecting to MongoDB Atlas...\n',err);
+   } else {
+     console.log('Connected to Atlas');
+    const collection = client.db("userdb").collection("credentials");
+    callback(collection);
+   }
+ });
+}
+
+withCredentials(function(credentials) {
+  app.post('/register', function(req,res){    
+    const cred = { };
+    cred.uname = req.body.name;
+    cred.email = req.body.email;
+    cred.password = bcrypt.hashSync(req.body.password, 10);
+    credentials.insertOne(cred, function(err,newuser){
+       if(err){
+         res.status(500).send("Username exists");
+       } else {
+         res.status(200).send("New User Created");
+       }
+    })
+  });
 });
+
+// app.post('/register', function(req,res){    
+//   const cred = { };
+//   cred.uname = req.body.name;
+//   cred.email = req.body.email;
+//   cred.password = bcrypt.hashSync(req.body.password, 10);
+//   credentials.insertOne(cred, function(err,newuser){
+//      if(err){
+//        res.status(500).send("Username exists");
+//      } else {
+//        res.status(200).send("New User Created");
+//      }
+//   })
+// });
 
 app.get('/register',  function(req, res) {
     dbConn.then(function(db) {
