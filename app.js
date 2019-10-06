@@ -81,7 +81,7 @@ var dbConn = function() {
 }
 
 
-if(dbConn){console.log('MongoDB connected...')}
+//if(dbConn){console.log('MongoDB connected...')}
 //var app = express();
 
 
@@ -152,7 +152,8 @@ withCredentials(function(credentials) {
        if(err){
          res.status(500).send("Username exists");
        } else {
-         res.status(200).send("New User Created");
+         //res.status(200).send("New User Created");
+         res.redirect('/login'); //here the redirect takes place
        }
     })
   });
