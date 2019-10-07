@@ -1,3 +1,7 @@
+const mongoose = require('mongoose');
+//const Loc = mongoose.model('Location');
+
+
 const reviewsCreate = function (req, res) {res
     .status(200)
     .json({"status" : "success"});
