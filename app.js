@@ -62,15 +62,6 @@ app.use(function(err, req, res, next) {
     });
 });
 
-
-
-
-
-
-
-
-
-
 var dbConn = function() {
   return new Promise((resolve, reject) => {
       mongodb.MongoClient.connect('mongodb+srv://james:efdfdbf7a413@cluster0-df223.mongodb.net/admin?retryWrites=true&w=majority',  { useNewUrlParser: true, useUnifiedTopology: true  },
@@ -81,55 +72,6 @@ var dbConn = function() {
   });
 }
 
-
-//if(dbConn){console.log('MongoDB connected...')}
-//var app = express();
-
-
-
-// router.post('/register',function(req,res,next){
-//   var userName = req.body.name;
-//    var email = req.body.email;
-//    var password = req.body.password;
-
-//   db.conn(function(err, database) {
-//     if (err) {
-//       res.sendStatus(500);
-//       console.log(err);
-//       return;
-//     }
-
-//     database.collection('users').insertOne({ name: userName, email : email, password: password });
-//   });
-// });
-// app.post('/register',(req, res)=>{
-//   var userName = req.body.name;
-//   var email = req.body.email;
-//   var password = req.body.password;
-//   db.conn(function(err, database) {
-//     if (err) {
-//       res.sendStatus(500);
-//       console.log(err);
-//       return;
-//     }
-
-//   db.collection('users').insertOne({ name: userName, email : email, password: password });
-//   res.render('login');
-// });
-
-// app.post('/register', function (req, res) {
-//   dbConn()
-//   .then(function(db) {
-//      // delete req.body._id; // for safety reasons
-//       res.send("item saved to database");
-//       db.collection('users').insertOne(req.body);
-//       res.send('Data received:\n' + JSON.stringify(req.body));
-//   })
-//   .catch(err => {
-//       console.log(err)
-//       res.status(400).send("unable to save to database");
-//   })
-// });
 function withCredentials(callback) {
   const uri = "mongodb+srv://james:efdfdbf7a413@cluster0-df223.mongodb.net/admin?retryWrites=true&w=majority"
   MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true  }, function(err, client) {
@@ -140,6 +82,7 @@ function withCredentials(callback) {
     const collection = client.db("userdb").collection("credentials");
     callback(collection);
    }
+   
  });
 }
 
@@ -157,12 +100,13 @@ withCredentials(function(credentials) {
          res.redirect('/login'); //here the redirect takes place
        }
     })
+    MongoClient.close();
   });
 });
 
 
-withCredentials(function(credentials) {
-  app.post('/login', function(req,res){    
+
+  app.get('/login', function(req,res){    
     const cred = { };
     cred.email = req.body.email;
     cred.password = bcrypt.hashSync(req.body.password, 10);
@@ -175,30 +119,15 @@ withCredentials(function(credentials) {
        }
     })
   });
-});
+;
 
-
-// app.post('/register', function(req,res){    
-//   const cred = { };
-//   cred.uname = req.body.name;
-//   cred.email = req.body.email;
-//   cred.password = bcrypt.hashSync(req.body.password, 10);
-//   credentials.insertOne(cred, function(err,newuser){
-//      if(err){
-//        res.status(500).send("Username exists");
-//      } else {
-//        res.status(200).send("New User Created");
-//      }
-//   })
+// app.get('/register',  function(req, res) {
+//     dbConn.then(function(db) {
+//         db.collection('users').find({}).toArray().then(function(feedbacks) {
+//             res.status(200).json(feedbacks);
+//         });
+//     });
 // });
-
-app.get('/register',  function(req, res) {
-    dbConn.then(function(db) {
-        db.collection('users').find({}).toArray().then(function(feedbacks) {
-            res.status(200).json(feedbacks);
-        });
-    });
-});
 
 app.listen(process.env.PORT || 3000, process.env.IP || '0.0.0.0' );
 
