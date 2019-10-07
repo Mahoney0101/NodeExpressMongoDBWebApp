@@ -6,12 +6,12 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 var bcrypt = require('bcryptjs');
-require('./app_server/models/db');
+require('./app_api/models/db');
 
 
-var routes = require('./app_server/routes/index');
-//var routesApi = require('./app_api/routes/index');
-// var users = require('./app_server/routes/users');
+const routes = require('./app_server/routes/index');
+const routesApi = require('./app_api/routes/index');
+//const users = require('./app_server/routes/users');
 
 var app = express();
 
@@ -26,6 +26,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+//app.use('/api', apiRoutes);
 
 app.use('/', routes);
 //app.use('/api', routesApi);
@@ -100,26 +102,8 @@ withCredentials(function(credentials) {
          res.redirect('/login'); //here the redirect takes place
        }
     })
-    MongoClient.close();
   });
 });
-
-
-
-  app.get('/login', function(req,res){    
-    const cred = { };
-    cred.email = req.body.email;
-    cred.password = bcrypt.hashSync(req.body.password, 10);
-    credentials.findOne(cred, function(err,newuser){
-       if(err){
-         res.status(500).send("Does not exist");
-       } else {
-         res.status(200).send("Good");
-        // res.redirect('/login'); //here the redirect takes place
-       }
-    })
-  });
-;
 
 // app.get('/register',  function(req, res) {
 //     dbConn.then(function(db) {
