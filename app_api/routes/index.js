@@ -1,25 +1,26 @@
 const express = require('express');
 const router = express.Router();
+const ctrlApplication = require('../controllers/apps');
+const ctrlReviews = require('../controllers/reviews');
 
 router
-  .route('/application')
-  //.get(ctrlLocations.locationsListByDistance)
-  //.post(ctrlLocations.locationsCreate);
+  .route('/apps')
+  .post(ctrlApplication.applicationCreate);
 
 router
-  .route('/application/:applicationid')
-  //.get(ctrlLocations.locationsReadOne)
-  //.put(ctrlLocations.locationsUpdateOne)
-  //.delete(ctrlLocations.locationsDeleteOne);
+  .route('/apps/:applicationid')
+  .get(ctrlApplication.applicationReadOne)
+  .put(ctrlApplication.applicationUpdateOne)
+  .delete(ctrlApplication.applicationDeleteOne);
 
 // reviews
 router
-  .route('/application/:applicationid/reviews')
-  //.post(ctrlReviews.reviewsCreate);
+  .route('/apps/:applicationid/reviews')
+  .post(ctrlReviews.reviewsCreate);
 
 router
   .route('/application/:locationid/reviews/:reviewid')
-  //.get(ctrlReviews.reviewsReadOne)
-  //.put(ctrlReviews.reviewsUpdateOne)
-  //.delete(ctrlReviews.reviewsDeleteOne);
+  .get(ctrlReviews.reviewsReadOne)
+  .put(ctrlReviews.reviewsUpdateOne)
+  .delete(ctrlReviews.reviewsDeleteOne);
 module.exports = router;

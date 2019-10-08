@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const application = mongoose.model('apps');
+const application = mongoose.model('Application');
 
 
 const reviewsCreate = function (req, res) {

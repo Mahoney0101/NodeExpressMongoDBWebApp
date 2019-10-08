@@ -8,10 +8,13 @@ const MongoClient = require('mongodb').MongoClient;
 var bcrypt = require('bcryptjs');
 require('./app_api/models/db');
 
+const index = require('./app_server/routes/index');
+const apiRoutes = require('./app_api/routes/index');
 
-const routes = require('./app_server/routes/index');
+
+//const routes = require('./app_server/routes/index');
 //const routesApi = require('./app_api/routes/index');
-const users = require('./app_server/routes/users');
+//const users = require('./app_server/routes/users');
 
 var app = express();
 
@@ -29,8 +32,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //app.use('/api', apiRoutes);
 
-app.use('/', routes);
+//app.use('/', routes);
 //app.use('/api', routesApi);
+app.use('/', index);
+app.use('/api', apiRoutes);
 // app.use('/users', users);
 
 // // catch 404 and forward to error handler

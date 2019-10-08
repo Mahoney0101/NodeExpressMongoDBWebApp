@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const application = mongoose.model('apps');
+const application = mongoose.model('Application');
 
 const _buildapplicationList = function(req, res, results, stats) {
   let application = [];
@@ -102,7 +102,7 @@ const applicationUpdateOne = function (req, res) {
   );
 };
 
-const locationsDeleteOne = function (req, res) {
+const applicationDeleteOne = function (req, res) {
   const applicationid = req.params.applicationid;
   if (applicationid) {
     application
@@ -129,7 +129,6 @@ const locationsDeleteOne = function (req, res) {
 };
 
 module.exports = {
-  applicationListByDistance,
   applicationCreate,
   applicationReadOne,
   applicationUpdateOne,
