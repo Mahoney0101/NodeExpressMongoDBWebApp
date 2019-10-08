@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-//const Loc = mongoose.model('Location');
+const application = mongoose.model('apps');
 
 
 const usersCreate = function (req, res) {res

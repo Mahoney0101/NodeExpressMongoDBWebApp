@@ -27,7 +27,6 @@ const applicationSchema = new mongoose.Schema({
     min: 0,
     max: 5
   },
-  FunctionalComponents: [String],
   reviews: [reviewSchema]
 });
 

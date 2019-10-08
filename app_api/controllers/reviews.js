@@ -5,7 +5,7 @@ const application = mongoose.model('apps');
 const reviewsCreate = function (req, res) {
     const applicationid = req.params.applicationid;
     if (applicationid) {
-      Loc
+        application
         .findById(applicationid)
         .select('reviews')
         .exec((err, application) => {
@@ -29,7 +29,7 @@ const reviewsCreate = function (req, res) {
   
   const reviewsReadOne = function (req, res) {
     if (req.params && req.params.applicationid && req.params.reviewid) {
-      Loc
+        application
         .findById(req.params.applicationid)
         .exec((err, application) => {
           if (!application) {
@@ -91,7 +91,7 @@ const reviewsCreate = function (req, res) {
         });
       return;
     }
-    Loc
+    application
       .findById(req.params.applicationid)
       .select('reviews')
       .exec((err, application) => {
@@ -153,7 +153,7 @@ const reviewsCreate = function (req, res) {
         });
       return;
     }
-    Loc
+    application
       .findById(req.params.applicationid)
       .select('reviews')
       .exec((err, application) => {
@@ -235,7 +235,7 @@ const reviewsCreate = function (req, res) {
   };
   
   const _updateAverageRating = function(applicationid) {
-    Loc
+    application
       .findById(applicationid)
       .select('rating reviews')
       .exec((err, application) => {
