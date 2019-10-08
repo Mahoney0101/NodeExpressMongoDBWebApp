@@ -10,8 +10,8 @@ require('./app_api/models/db');
 
 
 const routes = require('./app_server/routes/index');
-const routesApi = require('./app_api/routes/index');
-//const users = require('./app_server/routes/users');
+//const routesApi = require('./app_api/routes/index');
+const users = require('./app_server/routes/users');
 
 var app = express();
 
@@ -73,6 +73,8 @@ var dbConn = function() {
     });
   });
 }
+
+if(dbConn){console.log("connected");}
 
 function withCredentials(callback) {
   const uri = "mongodb+srv://james:efdfdbf7a413@cluster0-df223.mongodb.net/admin?retryWrites=true&w=majority"
