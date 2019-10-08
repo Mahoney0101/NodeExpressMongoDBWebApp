@@ -74,7 +74,7 @@ var dbConn = function() {
   });
 }
 
-if(dbConn){console.log("connected");}
+
 
 function withCredentials(callback) {
   const uri = "mongodb+srv://james:efdfdbf7a413@cluster0-df223.mongodb.net/admin?retryWrites=true&w=majority"
