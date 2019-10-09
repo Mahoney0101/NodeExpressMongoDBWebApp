@@ -13,11 +13,6 @@ const apiRoutes = require('./app_api/routes/index');
 const apiRoutesUser = require('./app_api/routes/users');
 
 
-
-//const routes = require('./app_server/routes/index');
-//const routesApi = require('./app_api/routes/index');
-//const users = require('./app_server/routes/users');
-
 var app = express();
 
 // view engine setup
@@ -32,13 +27,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-//app.use('/api', apiRoutes);
 
-//app.use('/', routes);
-//app.use('/api', routesApi);
 app.use('/', index);
 app.use('/api', apiRoutes);
-app.use('/api/users', apiRoutesUser);
+app.use('/api', apiRoutesUser);
 // app.use('/users', users);
 
 // // catch 404 and forward to error handler
