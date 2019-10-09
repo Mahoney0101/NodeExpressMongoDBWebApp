@@ -1,10 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const ctrlUser = require('../controllers/users');
 
 router
   .route('/register')
 
-  //.post(ctrlRegister.locationsCreate);CREATE REGISTER CNTRLLLLLLL
+  .post(ctrlUser.usersCreate);//CREATE REGISTER CNTRLLLLLLL
 
 //router
   //.route('/login')

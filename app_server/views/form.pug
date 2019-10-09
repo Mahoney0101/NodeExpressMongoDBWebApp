@@ -3,13 +3,14 @@ extends layout
 block content
   .row.banner
     .col-12
-      h1
-      |Please leave a review for others to read
+      
   .row
     .col-12.col-md-8
-      form(action="/reviews", method="post", role="form")
+      form#addReview(action="", method="post", role="form")
+        - if (error == "val")
+          .alert.alert-danger(role="alert") All fields required, please try again
         .form-group.row
-          label.col-10.col-sm-2.col-form-label(for="name") Name of application
+          label.col-10.col-sm-2.col-form-label(for="name") Name
           .col-12.col-sm-10
             input#name.form-control(name="name")
         .form-group.row
@@ -27,5 +28,3 @@ block content
             textarea#review.form-control(name="review", rows="5")
         button.btn.btn-primary.float-right Add my review
     .col-12.col-md-4
-
-    
