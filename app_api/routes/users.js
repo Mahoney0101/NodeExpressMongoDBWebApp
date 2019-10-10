@@ -3,7 +3,7 @@ const router = express.Router();
 const ctrlUser = require('../controllers/users');
 
 router
-  .route('/users')
+  .route('/register')
 
   .post(ctrlUser.usersCreate);//CREATE REGISTER CNTRLLLLLLL
 
