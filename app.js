@@ -31,7 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use('/', index, users);
-app.use('/api', apiRoutes, apiRoutesUser);
+app.use('/api', apiRoutesUser);
 app.use('/', users);
 
 // error handlers

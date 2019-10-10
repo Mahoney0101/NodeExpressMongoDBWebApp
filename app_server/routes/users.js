@@ -4,7 +4,7 @@ const ctrlUsers = require('../controllers/users');
 
 /* post users. */
 router
-  .route('/users')
+  .route('/register')
   //.get(ctrlUsers.addReview)
   .post(ctrlUsers.createUser);
 

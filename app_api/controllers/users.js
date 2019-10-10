@@ -33,10 +33,43 @@ const usersCreate = function (req, res) {
       }
     });
   };
+  
+
 const usersReadOne = function (req, res) {res
-    .status(200)
-    .json({"status" : "success"});
+  if (true) {
+    users
+      .find( {email: 'james.mahoney@students.ittralee.ie'} )
+      .exec((err, user) => {
+        if (!user) {
+          res	
+            .status(404) 
+            .json({	
+              "message": "userEmail not found"
+            });	 
+          return;
+        } else if (err) {
+          res	
+            .status(404) 
+            .json(err); 
+          return; 	
+        }
+        res		
+          .status(200)
+          .json(user);
+      });
+  } else {		
+    res		
+      .status(404) 	
+      .json({	
+        "message": "No userEmail in request"
+      });		
+  }
     };
+
+
+
+
+
 const usersUpdateOne = function (req, res) {res
     .status(200)
     .json({"status" : "success"});
