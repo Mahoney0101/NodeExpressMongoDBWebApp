@@ -19,7 +19,7 @@ const usersCreate = function (req, res) {
     user.create({
       name: req.body.name,
       email: req.body.email,
-      password: req.body.address,
+      password: req.body.password,
       
     }, (err, user) => {
       if (err) {

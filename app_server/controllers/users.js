@@ -15,7 +15,7 @@ const createUser = function(req, res) {
     };
     const requestOptions = {
       url : apiOptions.server + path,
-      method : 'post',
+      method : 'POST',
       json : postdata
     };
     if (!postdata.name || !postdata.email || !postdata.password) {
