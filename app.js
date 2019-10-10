@@ -30,9 +30,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.use('/', index, users);
+app.use('/', index, users, apiRoutesUser);
 app.use('/api', apiRoutesUser);
-app.use('/', users);
 
 // error handlers
 
