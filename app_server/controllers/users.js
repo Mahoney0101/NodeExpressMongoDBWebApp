@@ -3,9 +3,9 @@ const apiOptions = {
   server : 'http://localhost:3000'
 };
 if (process.env.NODE_ENV === 'production') {
-  apiOptions.server = 'https://pure-temple-67771.herokuapp.com';
+  apiOptions.server = 'https://fast-reef-45489.herokuapp.com/';
 }
-const doAddUser = function(req, res) {
+const createUser = function(req, res) {
    
     const path = `/api/users`;
     const postdata = {
@@ -15,7 +15,7 @@ const doAddUser = function(req, res) {
     };
     const requestOptions = {
       url : apiOptions.server + path,
-      method : 'POST',
+      method : 'post',
       json : postdata
     };
     if (!postdata.name || !postdata.email || !postdata.password) {
@@ -36,5 +36,5 @@ const doAddUser = function(req, res) {
     }
   };
 
-  module.exports = {doAddUser};
+  module.exports = {createUser};
   
