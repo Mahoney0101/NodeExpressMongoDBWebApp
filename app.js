@@ -31,14 +31,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/api', apiRoutes);
 app.use('/api', apiRoutesUser);
-// app.use('/users', users);
-
-// // catch 404 and forward to error handler
-// app.use(function(req, res, next) {
-//     var err = new Error('Not Found');
-//     err.status = 404;
-//     next(err);
-// });
 
 // error handlers
 
@@ -64,56 +56,6 @@ app.use(function(err, req, res, next) {
     });
 });
 
-var dbConn = function() {
-  return new Promise((resolve, reject) => {
-      mongodb.MongoClient.connect('mongodb+srv://james:efdfdbf7a413@cluster0-df223.mongodb.net/admin?retryWrites=true&w=majority',  { useNewUrlParser: true, useUnifiedTopology: true  },
-      (err, client) => {
-        // Client returned
-        var db = client.db('users');
-    });
-  });
-}
-
-
-
-// function withCredentials(callback) {
-//   const uri = "mongodb+srv://james:efdfdbf7a413@cluster0-df223.mongodb.net/admin?retryWrites=true&w=majority"
-//   MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true  }, function(err, client) {
-//    if(err) {
-//      console.log('Error occurred while connecting to MongoDB Atlas...\n',err);
-//    } else {
-//      console.log('Connected to Atlas');
-//     const collection = client.db("userdb").collection("credentials");
-//     callback(collection);
-//    }
-   
-//  });
-// }
-
-// withCredentials(function(credentials) {
-//   app.post('/register', function(req,res){    
-//     const cred = { };
-//     cred.uname = req.body.name;
-//     cred.email = req.body.email;
-//     cred.password = bcrypt.hashSync(req.body.password, 10);
-//     credentials.insertOne(cred, function(err,newuser){
-//        if(err){
-//          res.status(500).send("Username exists");
-//        } else {
-//          //res.status(200).send("New User Created");
-//          res.redirect('/login'); //here the redirect takes place
-//        }
-//     })
-//   });
-// });
-
-// app.get('/register',  function(req, res) {
-//     dbConn.then(function(db) {
-//         db.collection('users').find({}).toArray().then(function(feedbacks) {
-//             res.status(200).json(feedbacks);
-//         });
-//     });
-// });
 
 app.listen(process.env.PORT || 3000, process.env.IP || '0.0.0.0' );
 
