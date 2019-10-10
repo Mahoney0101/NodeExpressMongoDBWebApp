@@ -13,7 +13,7 @@ const createUser = function(req, res) {
       email: req.body.email,
       password: req.body.password
     };
-
+    console.log("helloooooo");
     const requestOptions = {
       url : apiOptions.server + path,
       method : 'POST',
