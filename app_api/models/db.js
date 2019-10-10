@@ -4,8 +4,18 @@ var dbURI = "mongodb+srv://james:efdfdbf7a413@cluster0-df223.mongodb.net/admin?r
 if (process.env.NODE_ENV === 'production') {
     dbURI = process.env.MONGOLAB_URI;
 }
+mongoose.connect(String(dbURI),{
+    useNewUrlParser: true,
+    useFindAndModify: true,
+    useCreateIndex: true,
+    keepAlive: 1,
+    reconnectTries: 30 // keep an eye open for performance and security
+    }
+    )
+    .then(() => console.log('Connected To Mongo!!'))
+    .catch(err => console.log(err));
+    
 
-mongoose.connect(String(dbURI),{ useNewUrlParser: true, useUnifiedTopology: true  });
 
 // CONNECTION EVENTS
 mongoose.connection.on('connected', function() {
