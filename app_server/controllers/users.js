@@ -9,9 +9,9 @@ if (process.env.NODE_ENV === 'production') {
 
 const createUser = function(req, res) {
     
-    const path = `/api/users`;
+    const path = `/`;
     const postdata = {
-      name: req.body.name,
+      uname: req.body.name,
       email: req.body.email,
       password: req.body.password
     };
@@ -33,6 +33,23 @@ const createUser = function(req, res) {
           }
         }
       );
+    };
+
+    const _showError = function (req, res, status) {
+      let title = '';
+      let content = '';
+      if (status === 404) {
+        title = '404, page not found';
+        content = 'Oh dear. Looks like we can\'t find this page. Sorry.'; 
+      } else {
+        title = `${status}, something's gone wrong`;
+        content = 'Something, somewhere, has gone just a little bit wrong.';
+      }
+      res.status(status);
+      res.render('generic-text', {
+        title : title,
+        content : content
+      });
     };
 
   module.exports = {createUser};
