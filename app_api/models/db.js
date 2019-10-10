@@ -6,7 +6,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 mongoose.connect(String(dbURI),{
     useNewUrlParser: true,
-    useFindAndModify: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
     reconnectTries: 30 // keep an eye open for performance and security
