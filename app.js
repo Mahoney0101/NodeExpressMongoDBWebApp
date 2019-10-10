@@ -8,7 +8,8 @@ const MongoClient = require('mongodb').MongoClient;
 var bcrypt = require('bcryptjs');
 require('./app_api/models/db');
 
-const index = require('./app_server/routes/index');
+const indexUsers = require('./app_server/routes/users');
+const index = require('.app_server/routes/index');
 const users = require('./app_server/routes/users');
 const apiRoutes = require('./app_api/routes/index');
 const apiRoutesUser = require('./app_api/routes/users');
@@ -29,9 +30,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.use('/', index);
-app.use('/api', apiRoutes);
-app.use('/api', apiRoutesUser);
+app.use('/', indexUsers, index);
+app.use('/api', apiRoutes, apiRoutesUser);
 app.use('/', users);
 
 // error handlers
