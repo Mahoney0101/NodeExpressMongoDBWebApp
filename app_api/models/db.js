@@ -9,7 +9,6 @@ mongoose.connect(String(dbURI),{
     useFindAndModify: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
-    keepAlive: 1,
     reconnectTries: 30 // keep an eye open for performance and security
     }
     )

@@ -5,8 +5,10 @@ const apiOptions = {
 if (process.env.NODE_ENV === 'production') {
   apiOptions.server = 'https://fast-reef-45489.herokuapp.com/';
 }
+
+
 const createUser = function(req, res) {
-   console.log("helloooooo");
+    
     const path = `/api/users`;
     const postdata = {
       name: req.body.name,
