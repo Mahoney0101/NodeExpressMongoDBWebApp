@@ -18,9 +18,6 @@ const createUser = function(req, res) {
       method : 'POST',
       json : postdata
     };
-    if (!postdata.name || !postdata.email || !postdata.password) {
-      res.redirect(`/register/err=val`);
-    } else {
       request(
         requestOptions,
         (err, response, body) => {
@@ -33,8 +30,7 @@ const createUser = function(req, res) {
           }
         }
       );
-    }
-  };
+    };
 
   module.exports = {createUser};
   
