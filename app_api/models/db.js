@@ -1,14 +1,14 @@
 var mongoose = require('mongoose');
 var gracefulShutdown;
-var dbURI = "mongodb+srv://james:efdfdbf7a413@cluster0-df223.mongodb.net/admin?retryWrites=true&w=majority";
+var dbURI = "mongodb+srv://james:efdfdbf7a413@cluster0-df223.mongodb.net/users?retryWrites=true&w=majority";
 if (process.env.NODE_ENV === 'production') {
     dbURI = process.env.MONGOLAB_URI;
 }
 mongoose.connect(String(dbURI),{
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useCreateIndex: true,
-    reconnectTries: 30 // keep an eye open for performance and security
+   // useCreateIndex: true,
+   // reconnectTries: 30 // keep an eye open for performance and security
     }
     )
     .then(() => console.log('Connected To Mongo!!'))

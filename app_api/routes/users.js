@@ -4,7 +4,7 @@ const ctrlUser = require('../controllers/users');
 
 router
   .route('/register')
-  .get(ctrlUser.usersReadOne)
+  //.get(ctrlUser.usersReadOne)
   .post(ctrlUser.usersCreate);//CREATE REGISTER CNTRLLLLLLL
   
 //router

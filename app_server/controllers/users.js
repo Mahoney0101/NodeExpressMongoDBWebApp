@@ -9,7 +9,7 @@ if (process.env.NODE_ENV === 'production') {
 
 const createUser = function(req, res) {
     
-    const path = `/`;
+    const path = `/register`;
     const postdata = {
       uname: req.body.name,
       email: req.body.email,
@@ -24,10 +24,11 @@ const createUser = function(req, res) {
       request(
         requestOptions,
         (err, response, body) => {
-          if (response.statusCode === 201) {
-            res.redirect(`/login`);
-          } else if (response.statusCode === 400 && body.name && body.name === 'ValidationError' ) {
-            res.redirect(`/register/err=val`);
+          if(err){console.log(err);}
+          if (!err && response.statusCode == 200) {
+            res.redirect('/login');
+        } else if (response.statusCode === 400 && body.name && body.name === 'ValidationError' ) {
+            res.redirect(`/form`);
           } else {
             _showError(req, res, response.statusCode);
           }
