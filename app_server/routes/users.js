@@ -4,8 +4,7 @@ const ctrlUsers = require('../controllers/users');
 
 /* post users. */
 router
-  .route('/')
-  //.get(ctrlUsers.addReview)
+  //.route('/')
   //.post(ctrlUsers.createUser);
 
 module.exports = router;

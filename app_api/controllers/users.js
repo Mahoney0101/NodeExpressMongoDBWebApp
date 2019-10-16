@@ -10,34 +10,16 @@ const usersCreate = function(req, res) {
        if(err){
          res.status(500).send("Username exists");
        } else {
-         //res.status(200).send("New User Created");
          res.redirect('/login'); //here the redirect takes place
        }
     })
   
 };
-// const usersCreate = function (req, res) {
-//   const cred = { };
-//       cred.uname = req.body.name;
-//       cred.email = req.body.email;
-//       cred.password = bcrypt.hashSync(req.body.password, 10);
-      
-//       credentials.insertOne(cred, function(err,newuser){
-//          if(err){
-//            res.status(500).send("Username exists");
-//          } else {
-//            //res.status(200).send("New User Created");
-//            res.redirect('/login'); //here the redirect takes place
-//          }
-//       })
-//     };
-      
   
-
 const usersReadOne = function (req, res) {res
   if (true) {
     user
-    .find( { email: 'james.mahoney@students.ittralee.ie'} )
+    .find( { email: 'james.mahoney@students.ittralee.ie' })
       .exec((err, user) => {
         if (!user) {
           res	

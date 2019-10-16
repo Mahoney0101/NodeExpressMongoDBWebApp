@@ -4,19 +4,17 @@ const ctrlUser = require('../controllers/users');
 
 router
   .route('/register')
-  //.get(ctrlUser.usersReadOne)
   .post(ctrlUser.usersCreate);//CREATE REGISTER CNTRLLLLLLL
   
-//router
-  //.route('/login')
+router
+  .route('/login')
   //.get(ctrlLocations.locationsReadOne)
   //.put(ctrlLocations.locationsUpdateOne)
   //.delete(ctrlLocations.locationsDeleteOne);
+  .post(ctrlUser.usersReadOne);
 
 // reviews
-router
-  .route('/login')
-  //.post(ctrlLogin.usersCreate);CREATE LOGIN CTRLLLLLLLLLLLLLLL
+
 
 router
   .route('/application/:locationid/reviews/:reviewid')
