@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true
-  }
-});
+  } },{ collection : 'users' }
+);
 
-mongoose.model('User', userSchema, 'users.users');
+mongoose.model('User', userSchema);

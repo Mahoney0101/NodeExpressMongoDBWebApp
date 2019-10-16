@@ -19,9 +19,9 @@ const usersCreate = function(req, res) {
 const usersReadOne = function (req, res) {res
   if (true) {
     user
-    .find( { email: 'james.mahoney@students.ittralee.ie' })
-      .exec((err, user) => {
-        if (!user) {
+    .find( { email:'hoooch.mahoney@gmail.comijj' })
+      .exec((err, found) => {
+        if (!found) {
           res	
             .status(404) 
             .json({	
@@ -36,7 +36,7 @@ const usersReadOne = function (req, res) {res
         }
         res		
           .status(200)
-          .json(user);
+          .json(found);
       });
   }
  };
