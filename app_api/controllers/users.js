@@ -19,7 +19,7 @@ const usersCreate = function(req, res) {
 const usersReadOne = function (req, res) {res
   if (true) {
     user
-    .find( { email:'hoooch.mahoney@gmail.comijj' })
+    .find( { email:req.body.email })
       .exec((err, found) => {
         if (!found) {
           res	
