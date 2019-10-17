@@ -16,7 +16,7 @@ const usersCreate = function(req, res) {
   
 };
   
-const usersReadOne = function (req, res) {res
+const usersReadOne = function (req, res) {
   if (true) {
     user
     .find( { email:req.body.email })
@@ -35,9 +35,27 @@ const usersReadOne = function (req, res) {res
           return; 	
         }
         res		
-          .status(200)
-          .json(found);
-      });
+          
+         // .json(found);// write code to compare password to req.body.password
+          for ( let user of found )
+          {
+            // Destructuring email and password from the current user
+            let { email, password } = user;
+            
+            // Comparing email and pwd from active user with the ones in object
+            if ( email === req.body.email && password === req.body.password )
+            {
+              // Found, redirect to form
+              res.redirect('/form');
+            }
+            else{
+              res
+              .status(404)
+              .json(err);
+              return;
+            }
+        
+      }})
   }
  };
 
