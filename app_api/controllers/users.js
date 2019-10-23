@@ -18,6 +18,7 @@ const usersCreate = function(req, res) {
   
 const usersReadOne = function (req, res) {
   if (true) {
+    
     user
     .find( { email:req.body.email })
       .exec((err, found) => {
@@ -35,8 +36,7 @@ const usersReadOne = function (req, res) {
           return; 	
         }
         res		
-          
-         // .json(found);// write code to compare password to req.body.password
+          // .json(found);// write code to compare password to req.body.password
           for ( let user of found )
           {
             // Destructuring email and password from the current user
