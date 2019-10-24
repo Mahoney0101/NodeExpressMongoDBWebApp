@@ -1,22 +1,13 @@
 var mongoose = require('mongoose');
 var gracefulShutdown;
-var dbURI = "mongodb+srv://james:efdfdbf7a413@cluster0-df223.mongodb.net/users?retryWrites=true&w=majority";
+var dbURI = "mongodb+srv://james:efdfdbf7a413@cluster0-df223.mongodb.net/ReviewBin?retryWrites=true&w=majority";
 if (process.env.NODE_ENV === 'production') {
     dbURI = process.env.MONGOLAB_URI;
 }
-mongoose.connect(String(dbURI),{
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-   // useCreateIndex: true,
-   // reconnectTries: 30 // keep an eye open for performance and security
-    }
-    )
+mongoose.connect(String(dbURI),{useNewUrlParser: true, useUnifiedTopology: true,})
     .then(() => console.log('Connected To Mongo!!'))
     .catch(err => console.log(err));
-    
-
-
-// CONNECTION EVENTS
+    // CONNECTION EVENTS
 mongoose.connection.on('connected', function() {
     console.log('Mongoose connected to ' + dbURI);
 });
@@ -26,7 +17,6 @@ mongoose.connection.on('error', function(err) {
 mongoose.connection.on('disconnected', function() {
     console.log('Mongoose disconnected');
 });
-
 // CAPTURE APP TERMINATION / RESTART EVENTS
 // To be called when process is restarted or terminated
 gracefulShutdown = function(msg, callback) {
