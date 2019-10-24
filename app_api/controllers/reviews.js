@@ -5,31 +5,31 @@ const application = mongoose.model('Application');
 const reviewsCreate = function (req, res) {
     const app = req.params.Application;
     const review = req.params.review;
-    if (true) {
-        application
-        .find(app)
-        .select('reviews')
-        .exec((err, found) => {
-          if (!found) {
-            app.create({name: req.body.name, rating: req.body.rating,reviews:[{reviewtext: review}]});
+    
+       // application
+       // .find({name: app})
+       // .exec((err, found) => {
+        //if (!found) {
+            application.create({name: req.body.Application, rating: req.body.rating, reviews:[{reviewText: req.body.review}]});
+            res.redirect('/reviews');	 
+         //   return;
+       // } 
+//        else if (err) {
+  //              res	
+    //              .status(404) 
+      //            .json(err); 
+        //        return; 	
+//        }
+  //      else if (found){
+    //        console.log("foundddddddddd")
+      //  }
+   // });
+}
+      
+        
+    
+    
 
-          } else {
-            app.updateOne(myquery, newvalues, function(err, res) {
-                if (err){ 
-                    throw err;
-                }
-              });
-          }
-        }
-      );
-    } else {
-      res
-        .status(404)
-        .json({
-          "message": "Not found, application required"
-        });
-    }
-  };
   
 //   const reviewsReadOne = function (req, res) {
 //     if (req.params && req.params.applicationid && req.params.reviewid) {
