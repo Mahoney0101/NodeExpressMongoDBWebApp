@@ -24,5 +24,5 @@ const applicationSchema = new mongoose.Schema({
   },
   reviews: [reviewSchema]
 });
-
+mongoose.model('Review',reviewSchema);
 mongoose.model('Application', applicationSchema);

@@ -1,29 +1,39 @@
 const mongoose = require('mongoose');
 const application = mongoose.model('Application');
-
+const Review = mongoose.model('Review');
 
 const reviewsCreate = function (req, res) {
     const app = req.params.Application;
-    const review = req.params.review;
+    const review = {reviewText: req.params.review};
     
-       // application
-       // .find({name: app})
-       // .exec((err, found) => {
-        //if (!found) {
-            application.create({name: req.body.Application, rating: req.body.rating, reviews:[{reviewText: req.body.review}]});
-            res.redirect('/reviews');	 
-         //   return;
-       // } 
-//        else if (err) {
-  //              res	
-    //              .status(404) 
-      //            .json(err); 
-        //        return; 	
-//        }
-  //      else if (found){
-    //        console.log("foundddddddddd")
-      //  }
-   // });
+       application
+       .find({name: app})
+       .select('reviews')
+       .exec((err, found) => {
+        if (!found) {
+          // application.create({name: req.body.Application, rating: req.body.rating, reviews:[{reviewText: req.body.review}]});
+           // res.redirect('/reviews');	 
+           return;
+       } 
+       else if (err) {
+               res	
+                 .status(404) 
+                 .json(err); 
+               return; 	
+       }
+       else if (found){
+        application.findOneAndUpdate(
+          { name: req.body.name },
+          { $push: { reviews: { reviewText: review } } },
+          { new: true }
+      )
+
+       // application.findOneAndUpdate({name: app}, {$push: {reviews:{reviewText: review}}});
+      
+        //application.save()
+           res.redirect('/reviews');
+         }
+   });
 }
       
         
