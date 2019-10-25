@@ -9,7 +9,7 @@ mongoose.connect(String(dbURI),{useNewUrlParser: true, useUnifiedTopology: true,
     .catch(err => console.log(err));
     // CONNECTION EVENTS
 mongoose.connection.on('connected', function() {
-    console.log('Mongoose connected to ' + dbURI);
+    console.log('Mongoose connected to MongoDB Atlas');
 });
 mongoose.connection.on('error', function(err) {
     console.log('Mongoose connection error: ' + err);
