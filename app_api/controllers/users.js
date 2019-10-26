@@ -63,20 +63,11 @@ const usersReadOne = function (req, res) {
 
 
 
-const usersUpdateOne = function (req, res) {res
-    .status(200)
-    .json({"status" : "success"});
-     };
-const usersDeleteOne = function (req, res) {res
-    .status(200)
-    .json({"status" : "success"});
-     };
+
 
 
  
 module.exports = {
   usersCreate,
-  usersReadOne,
-  usersUpdateOne,
-  usersDeleteOne
+  usersReadOne
 };

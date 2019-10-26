@@ -3,7 +3,7 @@ const application = mongoose.model('Application');
 const Review = mongoose.model('Review');
 
 const reviewsCreate = function (req, res) {
-    const app = {name: 'Snapchat'};
+    const app = {name: req.body.Application};
     const review = {reviewText: req.body.review, createdOn: Date.now};
     const reviewObj = new Review(review);
     application.findOneAndUpdate(app, {"$push":
