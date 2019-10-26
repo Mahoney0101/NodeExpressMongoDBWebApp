@@ -25,7 +25,24 @@ const reviewsCreate = function (req, res) {
       res.redirect('/reviews')
       
     })
-}    
+}
+
+ const getAppList = function(req,res){
+    const filter = {};
+    const all = application.find(filter);
+    all.exec(function (err, list) {
+      if (err) {
+        return handleError(err);
+      }
+      else{
+        res.json(list);
+      }
+    });
+}
+     
+
+
+ 
 
     
 
@@ -34,8 +51,8 @@ const reviewsCreate = function (req, res) {
   
   
   module.exports = {
-     reviewsCreate
-    // reviewsReadOne,
+     reviewsCreate,
+     getAppList
     // reviewsUpdateOne,
     // reviewsDeleteOne
   };
