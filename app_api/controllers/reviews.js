@@ -7,7 +7,7 @@ const reviewsCreate = function (req, res) {
     const review = {reviewText: req.body.review, createdOn: Date.now};
     const reviewObj = new Review(review);
     application.findOneAndUpdate(app, {"$push":
-    {'reviews': {reviewObj}}}, {useFindAndModify: false})
+    {'reviews': reviewObj}}, {useFindAndModify: false})
     .exec((err, found) => {
       if (!found) {
         res	
@@ -22,7 +22,7 @@ const reviewsCreate = function (req, res) {
           .json(err); 
         return; 	
       }
-      console.log(found);
+      res.redirect('/reviews')
       
     })
 }    
