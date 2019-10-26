@@ -53,6 +53,4 @@ const reviewsCreate = function (req, res) {
   module.exports = {
      reviewsCreate,
      getAppList
-    // reviewsUpdateOne,
-    // reviewsDeleteOne
   };
