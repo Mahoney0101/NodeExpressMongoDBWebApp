@@ -35,7 +35,11 @@ const reviewsCreate = function (req, res) {
         return handleError(err);
       }
       else{
-        res.json(list);
+        res.render('../../app_server/views/reviews',  { 
+            list: list})
+            console.log(list[0])
+           
+        
       }
     });
 }

@@ -9,5 +9,5 @@ router
 
 router
   .route('/reviews')
-  .post();
+  .get(ctrlReviews.getAppList);
 module.exports = router;
