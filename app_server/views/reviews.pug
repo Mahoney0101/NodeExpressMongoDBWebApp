@@ -4,13 +4,37 @@ include _includes/sharedHTMLfunctions
 
 block content
 
-  .row.banner
-    .col-12
-      h1
-      |Reviews
+ 
+  script.
+    function something(appReviews) {        
+      //- each review in reviews
+      //-   var i=0;
+      //-   var reviewCard = document.getElementById("review-card");
+      //-   reviewCard.innerHTML = JSON.stringify(review[i].reviewText);
+      //-   i++;
+      //- console.log(reviews)
+   //window.alert(app);
+      var reviewCard = document.getElementById("review-card");
+      reviewCard.innerHTML = JSON.stringify(appReviews);
+      //reviewCard.innerHTML =(JSON.stringify(appName[0].reviewText))
+      //document.body.appendChild(reviewCard);
+      //- window.alert(JSON.stringify(reviews[0].reviewText))
+    }
+  
+            
+
+
+  .col-12
+    h3 Reviews
   .row
     .col-12.col-md-6
       each app in list
         .card.card-primary
           .card-block
-           p= app.name
+           ul.list-unstyled
+            li= "App: "+app.name
+            li= "Rating: "+ app.rating
+          button.btn.btn-outline-primary.float-rightbutton(onclick= 'something(' + JSON.stringify(app.reviews) + ')') Click View Reviews
+    .col-md-6
+      .card.card-primary#review-card
+        .card-block      
