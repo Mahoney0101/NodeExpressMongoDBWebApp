@@ -7,20 +7,23 @@ block content
  
   script.
     function something(appReviews) {
-      APPS = JSON.parse(appReviews);
       var reviewCard = document.getElementById("review-card");
-      reviewCard.innerHTML = ("Reviews");        
-      for(var i=0;i<APPS.length;i++)
-      {
-        for(var j=0;j<APPS[i].length;j++){
-          CString = JSON.stringify(APPS[i][j]);
-          var review = document.createElement("review");
-          review.innerHTML = JSON.stringify(CString);
-          reviewCard.appendChild(review)
-        }
+      var revsRe = [];
+      appReviews.forEach(function(element) {
+        revsRe.push("Date: "+element.createdOn + "<br />");
+        revsRe.push("Review:" +element.reviewText + "<br /><br />");
+      });
+      revsRe = revsRe.map(function(e){
+        return JSON.stringify(e);
+      });
+      dataString = revsRe.join(",");
+      dataString = dataString.replace(/"|,/g,"")
+      reviewCard.innerHTML = (dataString);
       }
+             
       
-    }
+      
+    
   
             
 
