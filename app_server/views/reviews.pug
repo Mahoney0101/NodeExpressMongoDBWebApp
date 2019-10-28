@@ -6,26 +6,27 @@ block content
 
  
   script.
-    function something(appReviews) {        
-      //- each review in reviews
-      //-   var i=0;
-      //-   var reviewCard = document.getElementById("review-card");
-      //-   reviewCard.innerHTML = JSON.stringify(review[i].reviewText);
-      //-   i++;
-      //- console.log(reviews)
-   //window.alert(app);
+    function something(appReviews) {
+      APPS = JSON.parse(appReviews);
       var reviewCard = document.getElementById("review-card");
-      reviewCard.innerHTML = JSON.stringify(appReviews);
-      //reviewCard.innerHTML =(JSON.stringify(appName[0].reviewText))
-      //document.body.appendChild(reviewCard);
-      //- window.alert(JSON.stringify(reviews[0].reviewText))
+      reviewCard.innerHTML = ("Reviews");        
+      for(var i=0;i<APPS.length;i++)
+      {
+        for(var j=0;j<APPS[i].length;j++){
+          CString = JSON.stringify(APPS[i][j]);
+          var review = document.createElement("review");
+          review.innerHTML = JSON.stringify(CString);
+          reviewCard.appendChild(review)
+        }
+      }
+      
     }
   
             
 
 
   .col-12
-    h3 Reviews
+    h3 Applications #[span.float-right Reviews] 
   .row
     .col-12.col-md-6
       each app in list
@@ -35,6 +36,7 @@ block content
             li= "App: "+app.name
             li= "Rating: "+ app.rating
           button.btn.btn-outline-primary.float-rightbutton(onclick= 'something(' + JSON.stringify(app.reviews) + ')') Click View Reviews
+
     .col-md-6
       .card.card-primary#review-card
         .card-block      
