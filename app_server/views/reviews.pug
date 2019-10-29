@@ -11,7 +11,7 @@ block content
       var revsRe = [];
       appReviews.forEach(function(element) {
         revsRe.push("Date: "+element.createdOn + "<br />");
-        revsRe.push("Review: " +element.reviewText + "<br /><br />");
+        revsRe.push("<h5>Review: " +element.reviewText + "</h5><br /><br />");
       });
       revsRe = revsRe.map(function(e){
         return JSON.stringify(e);

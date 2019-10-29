@@ -111,7 +111,7 @@ nav.navbar.fixed-top.navbar-toggleable-md.navbar-inverse li a {
 
 .center{text-align: center;}
 
-#review-card{
-  font-size: auto;
+#review-card h5 {
+  font-family: 'Ariel';
 }
 
