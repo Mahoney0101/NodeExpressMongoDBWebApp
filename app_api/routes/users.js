@@ -5,6 +5,10 @@ const ctrlUser = require('../controllers/users');
 router
   .route('/register')
   .post(ctrlUser.usersCreate);
+
+router
+  .route('/')
+  .post(ctrlUser.usersCreate);
   
 router
   .route('/login')
