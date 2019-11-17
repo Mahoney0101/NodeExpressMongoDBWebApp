@@ -20,6 +20,9 @@ const logIn = function(req,res){
   if(usersReadOne){
     res.redirect('/form');
   }
+  else{
+    res.redirect('/register');
+  }
 
 }
 
@@ -50,17 +53,15 @@ const usersReadOne = function (req, res) {
             let { email, password } = user;
             
             // Comparing email and pwd from active user with the ones in object
-            if ( email === req.body.email && password === req.body.password )
+            if ( email == req.body.email && password == req.body.password )
             {
               // Found, redirect to form
              // res.redirect('/form');
              return true;
             }
             else{
-              res
-              .status(404)
-              .json(err);
-              return;
+            
+              return false;
             }
         
       }})
