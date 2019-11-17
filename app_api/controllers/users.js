@@ -27,12 +27,10 @@ const logIn = function(req,res){
 }
 
 const usersReadOne = function (req, res) {
-  if (true) {
-    
     user
     .find( { email:req.body.email })
       .exec((err, found) => {
-        if (!found) {
+        if (found==null) {
           res	
             .status(404) 
             .json({	
@@ -65,7 +63,6 @@ const usersReadOne = function (req, res) {
             }
         
       }})
-  }
  };
 
 
