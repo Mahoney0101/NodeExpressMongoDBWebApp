@@ -16,6 +16,13 @@ const usersCreate = function(req, res) {
   
 };
   
+const logIn = function(req,res){
+  if(usersReadOne){
+    res.redirect('/form');
+  }
+
+}
+
 const usersReadOne = function (req, res) {
   if (true) {
     
@@ -46,7 +53,8 @@ const usersReadOne = function (req, res) {
             if ( email === req.body.email && password === req.body.password )
             {
               // Found, redirect to form
-              res.redirect('/form');
+             // res.redirect('/form');
+             return true;
             }
             else{
               res
@@ -69,5 +77,5 @@ const usersReadOne = function (req, res) {
  
 module.exports = {
   usersCreate,
-  usersReadOne
+  logIn
 };

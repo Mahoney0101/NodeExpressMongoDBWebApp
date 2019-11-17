@@ -8,6 +8,6 @@ router
   
 router
   .route('/login')
-  .post(ctrlUser.usersReadOne);
+  .post(ctrlUser.logIn);
 
 module.exports = router;
