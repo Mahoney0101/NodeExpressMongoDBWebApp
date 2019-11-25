@@ -7,17 +7,20 @@ router.get('/', function(req, res, next) {
   res.render('register');
 });
 
+
 router.get('/login', (req, res, next) => {
   res.render('login');
 });
 router.get('/form', (req, res, next) => {
   res.render('form');
 });
-// router.get('/reviews', (req, res, next) => {
-//   res.render('reviews');
-// });
+
 router.get('/register', (req, res, next) => {
   res.render('register');
+});
+
+router.get('/about', function(req, res, next) {
+  res.render('about');
 });
 
 
