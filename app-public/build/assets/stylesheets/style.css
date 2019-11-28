@@ -2,32 +2,36 @@
 
 body {
   font-family: "Cabin", Arial, sans-serif;
-  color: #ffffff;
-  background-color: #108a93;
+  color: #000000;
+  background-color: #ffffff;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Lobster', cursive;
+  color: #000000;
 }
 
 .navbar {
-  background-color: #ad1d28;
-  border-color: #911821;
+  background-color: #ffffff;
+  border-color: #ffffff;
+  color: #000000;
 }
 
 .navbar-brand {
+  color: #000000;
   font-family: 'Lobster', cursive;
 }
 
 .banner {
+  color: #000000;
   margin-top: 4em;
-  border-bottom: 1px solid #469ea8;
+  border-bottom: 1px solid #000000;
   margin-bottom: 1.5em;
   padding-bottom: 0.5em;
 }
 
 h1 small {
-  color: #aaa;
+  color: rgb(0, 0, 0);
 }
 
 .card {
@@ -58,18 +62,18 @@ h1 small {
 }
 
 .badge-default, .btn-primary {
-  background-color: #ad1d28;
-  border-color: #911821;
+  background-color: #000000;
+  border-color: #807704;
 }
 
 h4 a, h4 a:hover {
-  color: #fff;
+  color: rgb(0, 0, 0);
 }
 
 h4 small {
   font-size: 60%;
   line-height: 200%;
-  color: #aaa;
+  color: rgb(0, 0, 0);
 }
 
 .address {
@@ -82,4 +86,32 @@ h4 small {
 
 legend {
   font-family: 'Lobster', cursive;
+  color : #000000;
 }
+
+.margins{
+  margin: auto;
+}
+.middle {
+    vertical-align: middle;
+  border-radius: 5px;
+  width: 150px;
+  height: 85px;
+  display: table-cell;
+}
+.colors {color: #000000;}
+
+nav.navbar.fixed-top.navbar-toggleable-md.navbar-inverse li a {
+  color: rgb(0, 0, 0) !important;
+}nav.navbar.fixed-top.navbar-toggleable-md.navbar-inverse a {
+  color: rgb(0, 0, 0) !important;
+}
+
+.container{margin-left: auto; margin-right: auto;}
+
+.center{text-align: center;}
+
+#review-card h5 {
+  font-family: 'Ariel';
+}
+
