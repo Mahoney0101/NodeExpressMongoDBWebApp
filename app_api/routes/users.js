@@ -12,6 +12,6 @@ router
   
 router
   .route('/login')
-  .post(ctrlUser.logIn);
+  .post(ctrlUser.usersReadOne);
 
 module.exports = router;

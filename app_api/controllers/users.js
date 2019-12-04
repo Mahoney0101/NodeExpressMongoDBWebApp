@@ -16,64 +16,32 @@ const usersCreate = function(req, res) {
   
 };
   
-const logIn = function(req,res){
-  if(usersReadOne){
-    res.redirect('/form');
-  }
-  else{
-    res.redirect('/register');
-  }
-
-}
-
-const usersReadOne = function (req, res) {
-    user
-    .find( { email:req.body.email })
-      .exec((err, found) => {
-        if (found==null) {
-          res	
-            .status(404) 
-            .json({	
-              "message": "userEmail not found"
-            });	 
-          return;
-        } else if (err) {
-          res	
-            .status(404) 
-            .json(err); 
-          return; 	
-        }
-        res		
-          // .json(found);// write code to compare password to req.body.password
-          for ( let user of found )
-          {
-            // Destructuring email and password from the current user
-            let { email, password } = user;
-            
-            // Comparing email and pwd from active user with the ones in object
-            if ( email == req.body.email && password == req.body.password )
-            {
-              // Found, redirect to form
-             // res.redirect('/form');
-             return true;
-            }
-            else{
-            
-              return false;
-            }
-        
-      }})
- };
 
 
-
-
-
-
-
-
+ const usersReadOne = function(req, res) {
+   const username = req.body.email;
+   const userSearch = {email:req.body.email};
+   const password = req.body.password;
+   const loginUser = user.find(userSearch);
+   loginUser.exec(function(err, users){
+     if (err || Object.entries(users).length === 0){
+      res.render('register');
+     }
+     else{
+       console.log(users);
+      for ( let user of users )
+                {
+                  if (user.email.toString() == username.toString() && user.password.toString() == password.toString())
+                  {
+                    res.render('form');  
+                  }
+                  else{
+                  res.render('login');
+                  }
+     }
+   }})}
  
 module.exports = {
   usersCreate,
-  logIn
+  usersReadOne
 };
