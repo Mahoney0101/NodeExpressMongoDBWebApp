@@ -1,4 +1,4 @@
-# webFrameworksApp
+# ReviewBin
 
 This is a simple web application using Node.js, Express, Mongoose and an Angular component. 
 The site is hosted on heroku and uses MongoDB Atlas for hosting the database.
