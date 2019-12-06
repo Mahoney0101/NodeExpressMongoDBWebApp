@@ -15,10 +15,7 @@ const usersCreate = function(req, res) {
     })
   
 };
-  
-
-
- const usersReadOne = function(req, res) {
+const usersReadOne = function(req, res) {
    const username = req.body.email;
    const userSearch = {email:req.body.email};
    const password = req.body.password;
@@ -33,7 +30,7 @@ const usersCreate = function(req, res) {
                 {
                   if (user.email.toString() == username.toString() && user.password.toString() == password.toString())
                   {
-                    res.render('form');  
+                    res.redirect('form');  
                   }
                   else{
                   res.render('login');
